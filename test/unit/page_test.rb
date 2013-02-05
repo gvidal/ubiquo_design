@@ -348,6 +348,13 @@ class PageTest < ActiveSupport::TestCase
     assert !page.publish
   end
 
+  def test_should_publish_page_if_published_page_does_not_exist
+    page = create_page
+    assert page.is_the_draft?
+    assert_nil page.published
+    assert page.publish
+  end
+
   def test_shouldnt_publish_a_page_if_published_clone_page_is_not_valid
     page = create_page
     dup_page = page.dup
